@@ -13,7 +13,7 @@ const initialState: TConstructorState = {
 };
 
 const constructorSlice = createSlice({
-  name: 'constructor',
+  name: 'burgerConstructor',
   initialState,
   reducers: {
     addIngredient: {
@@ -57,3 +57,4 @@ export const {
 } = constructorSlice.actions;
 
 export default constructorSlice.reducer;
+export const constructorReducer = constructorSlice.reducer;

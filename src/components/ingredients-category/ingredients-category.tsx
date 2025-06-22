@@ -3,6 +3,7 @@ import { TIngredientsCategoryProps } from './type';
 import { TIngredient } from '@utils-types';
 import { IngredientsCategoryUI } from '../ui/ingredients-category';
 import { useSelector } from '../../services/store';
+import { constructorSelectors } from '../../services/selectors/constructorSelectors';
 
 export const IngredientsCategory = forwardRef<
   HTMLUListElement,
@@ -10,7 +11,7 @@ export const IngredientsCategory = forwardRef<
 >(({ title, titleRef, ingredients }, ref) => {
   /** TODO: взять переменную из стора */
   const { bun, ingredients: constructorIngredients } = useSelector(
-    (state) => state.constructor
+    constructorSelectors.state
   );
 
   const ingredientsCounters = useMemo(() => {

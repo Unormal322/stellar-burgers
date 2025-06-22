@@ -19,8 +19,7 @@ import { AppHeader, Modal, OrderInfo, IngredientDetails } from '@components';
 import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { fetchIngredients } from '../../services/slices/ingredientsSlice';
-import { checkUserAuth, logoutUser } from '../../services/slices/userSlice';
-import { getCookie } from '../../utils/cookie';
+import { checkUserAuth } from '../../services/slices/userSlice';
 
 const App = () => {
   const location = useLocation();
@@ -37,7 +36,7 @@ const App = () => {
     dispatch(fetchIngredients());
 
     // Проверияем авторизирован ли пользователь
-    //dispatch(checkUserAuth());
+    dispatch(checkUserAuth());
   }, [dispatch]);
 
   return (

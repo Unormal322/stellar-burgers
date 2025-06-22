@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useSelector } from '../../services/store';
 import { TOrder } from '@utils-types';
 import { FeedInfoUI } from '../ui/feed-info';
+import { orderSelectors } from '../../services/selectors/orderSelectors';
 
 const getOrders = (orders: TOrder[], status: string): number[] =>
   orders
@@ -11,12 +12,8 @@ const getOrders = (orders: TOrder[], status: string): number[] =>
 
 export const FeedInfo: FC = () => {
   /** TODO: взять переменные из стора */
-  const { feeds, userOrders } = useSelector((state) => state.order);
-  const orders = feeds?.orders || userOrders || [];
-  const feed = {
-    total: feeds?.total || 0,
-    totalToday: feeds?.totalToday || 0
-  };
+  const orders = useSelector(orderSelectors.selectOrders);
+  const feed = useSelector(orderSelectors.selectFeedInfo);
 
   const readyOrders = getOrders(orders, 'done');
 

@@ -3,13 +3,14 @@ import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
 import { useParams } from 'react-router-dom';
 import { useSelector } from '../../services/store';
-import { TIngredient } from '@utils-types';
+import { ingredientsSelectors } from '../../services/selectors/ingredientsSelectors';
 
 export const IngredientDetails: FC = () => {
   /** TODO: взять переменную из стора */
   const { id } = useParams<{ id: string }>();
-  const { items } = useSelector((state) => state.ingredients);
-  const ingredientData = items.find((item) => item._id === id);
+  const ingredientData = useSelector(
+    ingredientsSelectors.selectIngredientById(id || '')
+  );
 
   if (!ingredientData) {
     return <Preloader />;

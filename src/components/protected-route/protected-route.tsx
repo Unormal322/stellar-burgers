@@ -1,6 +1,8 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { ReactElement } from 'react';
 import { Preloader } from '@ui';
+import { userSelectors } from '../../services/selectors/userSelectors';
+import { useSelector } from '../../services/store';
 
 interface ProtectedRouteProps {
   onlyUnAuth?: boolean;
@@ -13,7 +15,7 @@ export const ProtectedRoute = ({
 }: ProtectedRouteProps): ReactElement => {
   const location = useLocation();
   // Затычка, далее будет проверка авторизации
-  const isAuth = false;
+  const isAuth = useSelector(userSelectors.isAuth);
 
   if (!isAuth) {
     return <Preloader />;

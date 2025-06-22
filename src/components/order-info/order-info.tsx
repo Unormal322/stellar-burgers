@@ -4,6 +4,8 @@ import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useSelector } from '../../services/store';
 import { useParams } from 'react-router-dom';
+import { ingredientsSelectors } from '../../services/selectors/ingredientsSelectors';
+import { orderSelectors } from '../../services/selectors/orderSelectors';
 
 export const OrderInfo: FC = () => {
   /** TODO: взять переменные orderData и ingredients из стора */
@@ -11,12 +13,11 @@ export const OrderInfo: FC = () => {
   const { number } = useParams<{ number: string }>();
 
   // Получаем данные из стора
-  const { orderModalData, currentOrder, error } = useSelector(
-    (state) => state.order
-  );
-  const ingredients = useSelector((state) => state.ingredients.items);
+  const ingredients = useSelector(ingredientsSelectors.items);
 
-  const orderData = orderModalData || currentOrder;
+  const orderData =
+    useSelector(orderSelectors.currentOrder) ||
+    useSelector(orderSelectors.modalData);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {

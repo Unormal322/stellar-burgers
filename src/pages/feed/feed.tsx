@@ -1,14 +1,14 @@
 import { Preloader } from '@ui';
 import { FeedUI } from '@ui-pages';
-import { TOrder } from '@utils-types';
 import { FC, useEffect } from 'react';
 import { useSelector, useDispatch } from '../../services/store';
 import { fetchFeeds } from '../../services/slices/ordersSlice';
+import { orderSelectors } from '../../services/selectors/orderSelectors';
 
 export const Feed: FC = () => {
   /** TODO: взять переменную из стора */
   const dispatch = useDispatch();
-  const { feeds, orderRequest, error } = useSelector((state) => state.order);
+  const { feeds } = useSelector(orderSelectors.state);
 
   // Загружаем данные при монтировании
   useEffect(() => {
