@@ -20,10 +20,11 @@ import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { fetchIngredients } from '../../services/slices/ingredientsSlice';
 import { checkUserAuth } from '../../services/slices/userSlice';
+import { orderSelectors } from '../../services/selectors/orderSelectors';
 
 const App = () => {
   const location = useLocation();
-  const backgroundLocation = location.state?.backgroundLocation;
+  const backgroundLocation = location.state?.background;
   const navigate = useNavigate();
 
   const closeModal = () => {
@@ -119,7 +120,7 @@ const App = () => {
           <Route
             path='/ingredients/:id'
             element={
-              <Modal title='' onClose={closeModal}>
+              <Modal title='Детали ингредиента' onClose={closeModal}>
                 <IngredientDetails />
               </Modal>
             }
