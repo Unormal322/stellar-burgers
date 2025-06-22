@@ -8,7 +8,7 @@ import { orderSelectors } from '../../services/selectors/orderSelectors';
 export const Feed: FC = () => {
   /** TODO: взять переменную из стора */
   const dispatch = useDispatch();
-  const { feeds } = useSelector(orderSelectors.state);
+  const feeds = useSelector(orderSelectors.feeds);
 
   // Загружаем данные при монтировании
   useEffect(() => {

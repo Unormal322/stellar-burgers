@@ -1,16 +1,19 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useEffect } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
-import { useSelector } from '../../services/store';
+import { useSelector, useDispatch } from '../../services/store';
 import { useParams } from 'react-router-dom';
 import { ingredientsSelectors } from '../../services/selectors/ingredientsSelectors';
 import { orderSelectors } from '../../services/selectors/orderSelectors';
+import { fetchOrderByNumber } from '../../services/slices/ordersSlice';
 
 export const OrderInfo: FC = () => {
   /** TODO: взять переменные orderData и ingredients из стора */
   // Получаем ID заказа
   const { number } = useParams<{ number: string }>();
+
+  const dispatch = useDispatch();
 
   // Получаем данные из стора
   const ingredients = useSelector(ingredientsSelectors.items);
@@ -18,6 +21,12 @@ export const OrderInfo: FC = () => {
   const orderData =
     useSelector(orderSelectors.currentOrder) ||
     useSelector(orderSelectors.modalData);
+
+  useEffect(() => {
+    if (number) {
+      dispatch(fetchOrderByNumber(Number(number)));
+    }
+  }, [number, dispatch]);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {

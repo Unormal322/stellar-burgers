@@ -74,6 +74,7 @@ const orderSlice = createSlice({
       .addCase(createOrder.fulfilled, (state, action) => {
         state.orderRequest = false;
         state.currentOrder = action.payload;
+        state.orderModalData = action.payload;
       })
       .addCase(createOrder.rejected, (state, action) => {
         state.orderRequest = false;

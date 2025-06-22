@@ -8,7 +8,10 @@ const selectUserState = (state: RootState) => state.user;
 // Остальные селекторы с использованием базового
 const selectUser = createSelector([selectUserState], (user) => user.user);
 
-const selectIsAuth = createSelector([selectUserState], (user) => user.isAuth);
+const selectIsAuth = createSelector(
+  [selectUserState],
+  (user) => user.authChecked
+);
 
 const selectUserError = createSelector([selectUserState], (user) => user.error);
 
@@ -16,6 +19,6 @@ const selectUserError = createSelector([selectUserState], (user) => user.error);
 export const userSelectors = {
   state: selectUserState,
   user: selectUser,
-  isAuth: selectIsAuth,
+  authChecked: selectIsAuth,
   error: selectUserError
 };
