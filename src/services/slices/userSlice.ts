@@ -104,7 +104,8 @@ const userSlice = createSlice({
       })
       .addCase(getUser.rejected, (state, action) => {
         state.authChecked = true;
-        state.error = null;
+        state.error =
+          action.error.message || 'Произошла ошибка при получении пользователя';
       })
       .addCase(loginUser.pending, (state) => {
         state.error = null;
@@ -114,6 +115,7 @@ const userSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.authChecked = true;
         state.error =
           action.error.message || 'Произошла ошибка при входе в аккаунт';
       })
@@ -125,17 +127,21 @@ const userSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(registerUser.rejected, (state, action) => {
+        state.authChecked = true;
         state.error =
           action.error.message || 'Произошла ошибка при регистрации';
       })
       .addCase(updateUser.fulfilled, (state, action) => {
+        state.authChecked = true;
         state.user = action.payload;
       })
       .addCase(updateUser.rejected, (state, action) => {
+        state.authChecked = true;
         state.error =
           action.error.message || 'Произошла ошибка при обновлении профиля';
       })
       .addCase(logoutUser.fulfilled, (state) => {
+        state.authChecked = true;
         state.user = null;
       })
       .addCase('user/authChecked', (state) => {
